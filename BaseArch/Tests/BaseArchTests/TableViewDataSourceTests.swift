@@ -1,0 +1,103 @@
+//
+//  TableViewDataSourceTests.swift
+//  
+//
+//  Created by Maxim Makankov on 19.11.2022.
+//
+
+import XCTest
+@testable import BaseArch
+
+class TableViewDataSourceTests: XCTestCase {
+
+	var dataProvider: TableViewDataProviderMock!
+	var tableView: UITableViewMock!
+
+    override func setUpWithError() throws {
+		try super.setUpWithError()
+		dataProvider = TableViewDataProviderMock()
+		tableView = UITableViewMock()
+    }
+
+    override func tearDownWithError() throws {
+		dataProvider = nil
+		tableView = nil
+		try super.tearDownWithError()
+    }
+
+	func testNumberOfSections() throws {
+		// arrange
+		dataProvider.stubbedNumberOfSections = 10
+		let tableViewDataSource = TableViewDataSource(dataProvider: dataProvider)
+
+		// act
+		let result = tableViewDataSource.numberOfSections(in: tableView)
+
+		// assert
+		XCTAssertEqual(result, dataProvider.stubbedNumberOfSections)
+	}
+
+	func testNumberOfRowsInSections() throws {
+		// arrange
+		dataProvider.stubbedNumberOfRows = 10
+		let tableViewDataSource = TableViewDataSource(dataProvider: dataProvider)
+
+		// act
+		let result = tableViewDataSource.tableView(tableView, numberOfRowsInSection: 0)
+
+		// assert
+		XCTAssertEqual(result, dataProvider.stubbedNumberOfRows)
+	}
+
+	func testCellForRowAtIndexPathSuccess() throws {
+		// arrange
+		dataProvider.stubbedItemForRow = ItemViewModelMock()
+		tableView.stubbedDequeuedReusableCell = UITableViewCellMock()
+		let tableViewDataSource = TableViewDataSource(dataProvider: dataProvider)
+
+		// act
+		tableViewDataSource.registerCell(type: UITableViewCellMock.self, for: ItemViewModelMock.self)
+		let result = tableViewDataSource.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0))
+
+		// assert
+		XCTAssertTrue(result is UITableViewCellMock)
+	}
+
+	func testCellForRowAtIndexPathFailure() throws {
+		// arrange
+		dataProvider.stubbedItemForRow = nil
+		tableView.stubbedDequeuedReusableCell = UITableViewCellMock()
+		let tableViewDataSource = TableViewDataSource(dataProvider: dataProvider)
+
+		// act
+		tableViewDataSource.registerCell(type: UITableViewCellMock.self, for: ItemViewModelMock.self)
+		let result = tableViewDataSource.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0))
+
+		// assert
+		XCTAssertFalse(result is UITableViewCellMock)
+	}
+	
+	func testTitleForHeaderInSections() throws {
+		// arrange
+		dataProvider.stubbedTitleForSection = "test_title"
+		let tableViewDataSource = TableViewDataSource(dataProvider: dataProvider)
+
+		// act
+		let result = tableViewDataSource.tableView(tableView, titleForHeaderInSection: 0)
+
+		// assert
+		XCTAssertEqual(result, dataProvider.stubbedTitleForSection)
+	}
+	
+	func testSectionIndexTitles() throws {
+		// arrange
+		dataProvider.stubbedSectionsIndexTitles = ["test_title"]
+		let tableViewDataSource = TableViewDataSource(dataProvider: dataProvider)
+
+		// act
+		let result = tableViewDataSource.sectionIndexTitles(for: tableView)
+
+		// assert
+		XCTAssertEqual(result, dataProvider.stubbedSectionsIndexTitles)
+	}
+}

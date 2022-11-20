@@ -7,8 +7,7 @@
 
 import UIKit
 
-class GenericTableViewCellFactory<Cell>: TableViewCellFactory
-	where Cell: UITableViewCell & Configurable {
+class GenericTableViewCellFactory<Cell>: TableViewCellFactory where Cell: UITableViewCell & Configurable {
 
 	let cellIdentifier: String
 

@@ -24,18 +24,16 @@ extension TableViewDataSource {
 		type: Cell.Type,
 		identifier: String,
 		for itemViewModelType: ItemViewModel.Type
-	)
-		where Cell: UITableViewCell & Configurable {
-			let factory = GenericTableViewCellFactory<Cell>(cellIdentifier: identifier)
-			let itemViewModelTypeString = "\(itemViewModelType)"
-			itemViewModelTypeToFactoryMapping[itemViewModelTypeString] = factory
+	) where Cell: UITableViewCell & Configurable {
+		let factory = GenericTableViewCellFactory<Cell>(cellIdentifier: identifier)
+		let itemViewModelTypeString = "\(itemViewModelType)"
+		itemViewModelTypeToFactoryMapping[itemViewModelTypeString] = factory
 	}
 
 	public func registerCell<Cell>(
 		type: Cell.Type,
 		for itemViewModelType: ItemViewModel.Type
-	)
-		where Cell: UITableViewCell & Configurable {
+	) where Cell: UITableViewCell & Configurable {
 		registerCell(type: type, identifier: "\(type)", for: itemViewModelType)
 	}
 

@@ -5,10 +5,9 @@
 //  Created by Maxim Makankov on 02.11.2022.
 //
 
-import Foundation
 import UIKit
 
-protocol TableViewCellFactory {
+public protocol TableViewCellFactory {
 	var cellIdentifier: String { get }
 	func makeCell(
 		for tableView: UITableView,

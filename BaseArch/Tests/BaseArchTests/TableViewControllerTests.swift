@@ -38,7 +38,7 @@ class TableViewControllerTests: XCTestCase {
 
 	func testDataSourceDidSet() throws {
 		// arrange
-		let dataSource = UITableViewDataSourceMock()
+		let dataSource = UITableViewDataSourceStub()
 		tableViewController.tableView = tableView
 
 		// act
@@ -51,7 +51,7 @@ class TableViewControllerTests: XCTestCase {
 
 	func testDelegateeDidSet() throws {
 		// arrange
-		let delegate = UITableViewDelegateMock()
+		let delegate = UITableViewDelegateStub()
 		tableViewController.tableView = tableView
 
 		// act

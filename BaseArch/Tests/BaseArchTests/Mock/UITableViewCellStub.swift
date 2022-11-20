@@ -8,11 +8,11 @@
 import UIKit
 import BaseArch
 
-class UITableViewCellMock: UITableViewCell & Configurable {
+class UITableViewCellStub: UITableViewCell & Configurable {
 
-	var stubbedItemViewModel: ItemViewModelMock!
+	var stubbedItemViewModel: ItemViewModelStub!
 
-	var itemViewModel: ItemViewModelMock? {
+	var itemViewModel: ItemViewModelStub? {
 		get {
 			stubbedItemViewModel
 		}

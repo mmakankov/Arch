@@ -10,12 +10,12 @@ import XCTest
 
 class TableViewDataSourceTests: XCTestCase {
 
-	var dataProvider: TableViewDataProviderMock!
+	var dataProvider: TableViewDataProviderStub!
 	var tableView: UITableViewMock!
 
     override func setUpWithError() throws {
 		try super.setUpWithError()
-		dataProvider = TableViewDataProviderMock()
+		dataProvider = TableViewDataProviderStub()
 		tableView = UITableViewMock()
     }
 
@@ -51,30 +51,30 @@ class TableViewDataSourceTests: XCTestCase {
 
 	func testCellForRowAtIndexPathSuccess() throws {
 		// arrange
-		dataProvider.stubbedItemForRow = ItemViewModelMock()
-		tableView.stubbedDequeuedReusableCell = UITableViewCellMock()
+		dataProvider.stubbedItemForRow = ItemViewModelStub()
+		tableView.stubbedDequeuedReusableCell = UITableViewCellStub()
 		let tableViewDataSource = TableViewDataSource(dataProvider: dataProvider)
 
 		// act
-		tableViewDataSource.registerCell(type: UITableViewCellMock.self, for: ItemViewModelMock.self)
+		tableViewDataSource.registerCell(type: UITableViewCellStub.self, for: ItemViewModelStub.self)
 		let result = tableViewDataSource.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0))
 
 		// assert
-		XCTAssertTrue(result is UITableViewCellMock)
+		XCTAssertTrue(result is UITableViewCellStub)
 	}
 
 	func testCellForRowAtIndexPathFailure() throws {
 		// arrange
 		dataProvider.stubbedItemForRow = nil
-		tableView.stubbedDequeuedReusableCell = UITableViewCellMock()
+		tableView.stubbedDequeuedReusableCell = UITableViewCellStub()
 		let tableViewDataSource = TableViewDataSource(dataProvider: dataProvider)
 
 		// act
-		tableViewDataSource.registerCell(type: UITableViewCellMock.self, for: ItemViewModelMock.self)
+		tableViewDataSource.registerCell(type: UITableViewCellStub.self, for: ItemViewModelStub.self)
 		let result = tableViewDataSource.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0))
 
 		// assert
-		XCTAssertFalse(result is UITableViewCellMock)
+		XCTAssertFalse(result is UITableViewCellStub)
 	}
 	
 	func testTitleForHeaderInSections() throws {

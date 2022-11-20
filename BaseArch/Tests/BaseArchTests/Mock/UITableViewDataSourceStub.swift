@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UITableViewDataSourceMock: NSObject, UITableViewDataSource {
+class UITableViewDataSourceStub: NSObject, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		0
 	}

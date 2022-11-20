@@ -10,16 +10,16 @@ import XCTest
 
 class TableViewDelegateTests: XCTestCase {
 
-	var dataProvider: TableViewDataProviderMock!
-	var itemViewModel: ItemViewModelMock!
+	var dataProvider: TableViewDataProviderStub!
+	var itemViewModel: ItemViewModelStub!
 	var tableView: UITableViewMock!
 
     override func setUpWithError() throws {
 		try super.setUpWithError()
-		dataProvider = TableViewDataProviderMock()
-		itemViewModel = ItemViewModelMock()
+		dataProvider = TableViewDataProviderStub()
+		itemViewModel = ItemViewModelStub()
 		tableView = UITableViewMock()
-		tableView.stubbedCell = UITableViewCellMock()
+		tableView.stubbedCell = UITableViewCellStub()
 		dataProvider.stubbedItemForRow = itemViewModel
     }
 
@@ -35,7 +35,7 @@ class TableViewDelegateTests: XCTestCase {
 		let selector = #selector(UITableView.reloadData)
 		let tableViewDelegate = TableViewDelegate(
 			dataProvider: dataProvider,
-			map: ["\(ItemViewModelMock.self)": selector]
+			map: ["\(ItemViewModelStub.self)": selector]
 		)
 
 		// act

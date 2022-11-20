@@ -8,6 +8,6 @@
 import Foundation
 import BaseArch
 
-class ItemViewModelMock: ItemViewModel {
+class ItemViewModelStub: ItemViewModel {
 
 }

@@ -15,7 +15,7 @@ class UITableViewMock: UITableView {
 	var stubbedDelegate: UITableViewDelegate!
 	var stubbedCell: UITableViewCell!
 	
-	var reloadDataCalled = false
+	private(set) var reloadDataCalled = false
 
 	override var dataSource: UITableViewDataSource? {
 		get {

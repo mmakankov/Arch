@@ -8,7 +8,7 @@
 import Foundation
 import BaseArch
 
-class TableViewDataProviderMock: TableViewDataProvider {
+class TableViewDataProviderStub: TableViewDataProvider {
 
 	var stubbedNumberOfSections: Int!
 	var stubbedNumberOfRows: Int!

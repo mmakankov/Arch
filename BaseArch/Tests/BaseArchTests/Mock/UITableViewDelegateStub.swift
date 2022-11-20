@@ -7,6 +7,6 @@
 
 import UIKit
 
-class UITableViewDelegateMock: NSObject, UITableViewDelegate {
+class UITableViewDelegateStub: NSObject, UITableViewDelegate {
 
 }

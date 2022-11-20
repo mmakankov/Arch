@@ -11,14 +11,14 @@ import XCTest
 class GenericTableViewCellFactoryTests: XCTestCase {
 
 	var tableView: UITableViewMock!
-	var itemViewModel: ItemViewModelMock!
-	var factory: GenericTableViewCellFactory<UITableViewCellMock>!
+	var itemViewModel: ItemViewModelStub!
+	var factory: GenericTableViewCellFactory<UITableViewCellStub>!
 
     override func setUpWithError() throws {
 		try super.setUpWithError()
 		tableView = UITableViewMock()
-		itemViewModel = ItemViewModelMock()
-		factory = GenericTableViewCellFactory<UITableViewCellMock>(cellIdentifier: "")
+		itemViewModel = ItemViewModelStub()
+		factory = GenericTableViewCellFactory<UITableViewCellStub>(cellIdentifier: "")
     }
 
     override func tearDownWithError() throws {
@@ -30,7 +30,7 @@ class GenericTableViewCellFactoryTests: XCTestCase {
 
     func testMakeCellSuccess() throws {
         // arrange
-		let cell = UITableViewCellMock()
+		let cell = UITableViewCellStub()
 		cell.stubbedItemViewModel = itemViewModel
 		tableView.stubbedDequeuedReusableCell = cell
 
@@ -39,8 +39,8 @@ class GenericTableViewCellFactoryTests: XCTestCase {
 
 		// assert
 		XCTAssertEqual(result, cell)
-		XCTAssertTrue(result is UITableViewCellMock)
-		let resultCell = result as! UITableViewCellMock
+		XCTAssertTrue(result is UITableViewCellStub)
+		let resultCell = result as! UITableViewCellStub
 		XCTAssertTrue(resultCell.itemViewModel != nil)
     }
 
@@ -54,6 +54,6 @@ class GenericTableViewCellFactoryTests: XCTestCase {
 
 		// assert
 		XCTAssertEqual(result, cell)
-		XCTAssertFalse(result is UITableViewCellMock)
+		XCTAssertFalse(result is UITableViewCellStub)
 	}
 }
